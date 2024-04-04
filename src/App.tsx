@@ -1,7 +1,8 @@
+import AppLayout from "./components/layout/AppLayout";
 import UploadPage from "./pages/UploadPage/UploadPage";
 
 function App() {
-  return <UploadPage />;
+  return <AppLayout />;
 }
 
 export default App;

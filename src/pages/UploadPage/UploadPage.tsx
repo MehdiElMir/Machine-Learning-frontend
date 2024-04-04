@@ -46,6 +46,11 @@ function UploadPage() {
 
   return (
     <S.Main>
+      <img
+        src="/assets/logo.png"
+        alt="logo image"
+        style={{ width: "60px", height: "auto" }}
+      />
       <S.Title>
         File to Insights: Harnessing Machine Learning for Your Data
       </S.Title>
@@ -65,9 +70,9 @@ function UploadPage() {
         </Dragger>
       </S.DraggerWrapper>
 
-      <Button type="primary" htmlType="submit">
+      <Link type="primary" to={"/app/preprocessing"}>
         Start
-      </Button>
+      </Link>
     </S.Main>
   );
 }
