@@ -7,12 +7,13 @@ import {
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { Link, NavLink } from "react-router-dom";
+import { ImFilter } from "react-icons/im";
 
 const items: MenuProps["items"] = [
   {
     label: <NavLink to={"preprocessing"}>Pre-processing</NavLink>,
     key: "mail",
-    icon: <MailOutlined />,
+    icon: <ImFilter />,
   },
   {
     label: "Analyse",
@@ -20,42 +21,14 @@ const items: MenuProps["items"] = [
     icon: <SettingOutlined />,
     children: [
       {
-        type: "group",
-        label: "Item 1",
-        children: [
-          {
-            label: <Link to={"linear-regression"}>Linear Regression</Link>,
-            key: "setting:1",
-          },
-          {
-            label: "Option 2",
-            key: "setting:2",
-          },
-        ],
+        label: <Link to={"linear-regression"}>Linear Regression</Link>,
+        key: "setting:1",
       },
       {
-        type: "group",
-        label: "Item 2",
-        children: [
-          {
-            label: "Option 3",
-            key: "setting:3",
-          },
-          {
-            label: "Option 4",
-            key: "setting:4",
-          },
-        ],
+        label: "Option 2",
+        key: "setting:2",
       },
     ],
-  },
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
-      </a>
-    ),
-    key: "alipay",
   },
 ];
 
@@ -76,7 +49,8 @@ const HeaderMenu: React.FC = () => {
       style={{
         paddingLeft: "30px",
         paddingRight: "30px",
-        borderRadius: "40px",
+        width: "100%",
+        borderRadius: "7px",
       }}
     />
   );

@@ -6,6 +6,8 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 import AppLayout from "./components/layout/AppLayout";
 import { PreprocessingPage } from "./pages/PreprocessingPage/PreprocessingPage";
 import { LinearRegressionPage } from "./pages/LinearRegression/LinearRegression";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

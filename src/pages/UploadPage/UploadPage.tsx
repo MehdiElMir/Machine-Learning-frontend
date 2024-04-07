@@ -2,20 +2,37 @@ import * as S from "./Upload.styles";
 import React from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import { Button, Form, message, Upload, UploadProps } from "antd";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { uploadFile } from "../../store/slices/uploadSlice";
 
 function UploadPage() {
   const { Dragger } = Upload;
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const { loading } = useSelector((state: RootState) => state.upload);
+  console.log(loading);
   const props: UploadProps = {
     name: "file",
     method: "POST",
-    multiple: true,
-
+    multiple: false,
     beforeUpload: (file) => {
       message.success(`${file.name} file added successfully.`);
       console.log({ file });
+      const formData = new FormData();
+      formData.append("file", file);
+      console.log(formData);
+      dispatch(uploadFile(formData))
+        .then(() => {
+          navigate("/app/preprocessing");
+        })
+        .catch((error: any) => {
+          console.error("Error uploading file:", error);
+        });
       return false;
     },
     accept: ".csv",
@@ -27,7 +44,6 @@ function UploadPage() {
         "100%": "#6047ed",
       },
     },
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
@@ -47,7 +63,7 @@ function UploadPage() {
   return (
     <S.Main>
       <img
-        src="/assets/logo.png"
+        src={logo}
         alt="logo image"
         style={{ width: "60px", height: "auto" }}
       />
@@ -69,10 +85,6 @@ function UploadPage() {
           </p>
         </Dragger>
       </S.DraggerWrapper>
-
-      <Link type="primary" to={"/app/preprocessing"}>
-        Start
-      </Link>
     </S.Main>
   );
 }
