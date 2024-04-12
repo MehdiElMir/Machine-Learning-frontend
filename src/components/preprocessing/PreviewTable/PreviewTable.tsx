@@ -32,7 +32,7 @@ const PreviewTable: React.FC = () => {
       dataSource={dataSource}
       columns={columns}
       size="small"
-      scroll={{ y: 240, x: 1300 }}
+      scroll={{ y: 560, x: 1300 }}
     />
   );
 };

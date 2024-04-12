@@ -11,7 +11,6 @@ const ButtonModal: React.FC = () => {
         Preview of the dataset
       </Button>
       <Modal
-        title="Modal 1000px width"
         centered
         open={open}
         onOk={() => setOpen(false)}

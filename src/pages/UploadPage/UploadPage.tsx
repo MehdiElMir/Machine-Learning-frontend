@@ -1,7 +1,7 @@
 import * as S from "./Upload.styles";
 import React from "react";
 import { CloudUploadOutlined } from "@ant-design/icons";
-import { Button, Form, message, Upload, UploadProps } from "antd";
+import { Button, Form, message, notification, Upload, UploadProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,31 +61,33 @@ function UploadPage() {
   };
 
   return (
-    <S.Main>
-      <img
-        src={logo}
-        alt="logo image"
-        style={{ width: "60px", height: "auto" }}
-      />
-      <S.Title>
-        File to Insights: Harnessing Machine Learning for Your Data
-      </S.Title>
+    <>
+      <S.Main>
+        <img
+          src={logo}
+          alt="logo image"
+          style={{ width: "60px", height: "auto" }}
+        />
+        <S.Title>
+          File to Insights: Harnessing Machine Learning for Your Data
+        </S.Title>
 
-      <S.DraggerWrapper>
-        <Dragger {...props}>
-          <p className="ant-upload-drag-icon">
-            <CloudUploadOutlined />
-          </p>
-          <p className="ant-upload-text">
-            Click or drag file to this area to upload
-          </p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from
-            uploading company data or other band files
-          </p>
-        </Dragger>
-      </S.DraggerWrapper>
-    </S.Main>
+        <S.DraggerWrapper>
+          <Dragger {...props}>
+            <p className="ant-upload-drag-icon">
+              <CloudUploadOutlined />
+            </p>
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+            <p className="ant-upload-hint">
+              Support for a single or bulk upload. Strictly prohibit from
+              uploading company data or other band files
+            </p>
+          </Dragger>
+        </S.DraggerWrapper>
+      </S.Main>
+    </>
   );
 }
 
