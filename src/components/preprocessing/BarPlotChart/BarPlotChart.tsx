@@ -36,7 +36,7 @@ export const BarPlotChart: React.FC<ChartProps> = ({ title, data }) => {
       yAxis: {
         type: "value",
         axisLine: {
-          show: false,
+          show: true,
           lineStyle: {
             type: "dotted",
             dashOffset: 5,
@@ -45,7 +45,7 @@ export const BarPlotChart: React.FC<ChartProps> = ({ title, data }) => {
         splitLine: {
           lineStyle: {
             width: 1,
-            type: "dotted",
+            type: "solid",
             opacity: 0.5,
           },
         },
@@ -72,8 +72,15 @@ export const BarPlotChart: React.FC<ChartProps> = ({ title, data }) => {
   return (
     <>
       <S.ChartCard>
-        <p>{title}</p>
-        <Meta description={<div id="main" style={{ height: "17rem" }}></div>} />
+        <p style={{ textAlign: "center" }}>{title}</p>
+        <Meta
+          description={
+            <div
+              id="main"
+              style={{ height: "17rem", overflowX: "scroll" }}
+            ></div>
+          }
+        />
       </S.ChartCard>
     </>
   );

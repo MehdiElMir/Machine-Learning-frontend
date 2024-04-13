@@ -47,8 +47,8 @@ const AppLayout: React.FC = () => {
             padding: 24,
             height: "calc(100vh - 80px)",
             background: colorBgContainer,
-
             borderRadius: borderRadiusLG,
+            overflowY: "scroll",
           }}
         >
           <Outlet />

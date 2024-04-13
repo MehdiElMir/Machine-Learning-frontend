@@ -48,8 +48,8 @@ export const PreprocessingPage: React.FC = () => {
             style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
           >
             <Statistic
-              title="Percentage of missing values"
-              value={data.total_missing_percentage}
+              title="Missing values"
+              value={Number(data.total_missing_percentage.toFixed(2))}
               valueStyle={{ color: "#d75740" }}
               prefix={<AiFillQuestionCircle style={{ marginRight: "1rem" }} />}
               suffix="%"
@@ -59,13 +59,13 @@ export const PreprocessingPage: React.FC = () => {
       </Row>
 
       <Row gutter={[16, 16]}>
-        <Col span={12}>
+        <Col span={12} sm={24} xs={24} md={12}>
           <BarPlotChart
-            title="Missing values"
+            title="Missing values in each feature (%)"
             data={data.missing_percentage}
           ></BarPlotChart>
         </Col>
-        <Col span={12}>
+        <Col span={12} sm={24} xs={24} md={12}>
           <Card
             bordered={false}
             style={{ boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px" }}
