@@ -9,7 +9,6 @@ export const DeleteRowsButton: React.FC = () => {
     data: { dataset },
   } = useSelector((state: RootState) => state.dataInfo);
   const dispatch = useDispatch();
-  const { notification } = App.useApp();
 
   const handleButton = () => {
     const requestData = {
@@ -17,11 +16,6 @@ export const DeleteRowsButton: React.FC = () => {
     };
     console.log(requestData);
     dispatch(deletingRowsWithMissingValues(requestData));
-    notification.success({
-      message: `Notification topLeft`,
-      description: "Hello, Ant Design!!",
-      placement: "bottomRight",
-    });
   };
 
   const confirm: PopconfirmProps["onConfirm"] = (e) => {

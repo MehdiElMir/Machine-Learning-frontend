@@ -4,7 +4,7 @@ import {
   uploadFileApi,
 } from "../../api/dataset.api";
 
-interface IngredientsState {
+interface DataInfoState {
   data: {
     dataset: any[];
     imputed_dataset: any[];
@@ -16,7 +16,7 @@ interface IngredientsState {
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
-const initialState: IngredientsState = {
+const initialState: DataInfoState = {
   data: {
     dataset: [],
     imputed_dataset: [],
