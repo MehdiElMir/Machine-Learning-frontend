@@ -8,9 +8,10 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 import ButtonModal from "../../components/preprocessing/ButtonModal/ButtonModal";
 import * as S from "./Preprocessing.styles";
 import { BarPlotChart } from "../../components/preprocessing/BarPlotChart/BarPlotChart";
+import DeleteRowsButton from "../../components/preprocessing/deleteRowsButton/DeleteRowsButton";
 
 export const PreprocessingPage: React.FC = () => {
-  const { data } = useSelector((state: RootState) => state.upload);
+  const { data } = useSelector((state: RootState) => state.dataInfo);
 
   return (
     <>
@@ -61,7 +62,9 @@ export const PreprocessingPage: React.FC = () => {
       </Row>
 
       <Row>
-        <Col span={12}></Col>
+        <Col span={12}>
+          <DeleteRowsButton />
+        </Col>
         <Col span={12}>
           <BarPlotChart
             title="Missing values"

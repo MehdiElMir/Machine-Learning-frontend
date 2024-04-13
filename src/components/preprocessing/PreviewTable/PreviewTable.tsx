@@ -11,7 +11,7 @@ interface Column {
 const PreviewTable: React.FC = () => {
   const {
     data: { dataset },
-  } = useSelector((state: RootState) => state.upload);
+  } = useSelector((state: RootState) => state.dataInfo);
 
   const [columns, setColumns] = useState<Column[]>([]);
   const [dataSource, setDataSource] = useState<any[]>([]);

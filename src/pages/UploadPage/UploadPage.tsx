@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { uploadFile } from "../../store/slices/uploadSlice";
+import { uploadFile } from "../../store/slices/dataInfoSlice";
 
 function UploadPage() {
   const { Dragger } = Upload;
@@ -14,7 +14,7 @@ function UploadPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading } = useSelector((state: RootState) => state.upload);
+  const { loading } = useSelector((state: RootState) => state.dataInfo);
   console.log(loading);
   const props: UploadProps = {
     name: "file",

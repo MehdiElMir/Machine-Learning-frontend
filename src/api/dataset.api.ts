@@ -53,3 +53,19 @@ export const uploadFileApi = async (
     throw error.response?.data || "Upload file failed";
   }
 };
+
+export const deleteRowsWithMissingValuesApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("Deleting rows failed", error);
+    throw error.response?.data || "Deleting rows failed";
+  }
+};

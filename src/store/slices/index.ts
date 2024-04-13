@@ -1,5 +1,5 @@
-import uploadReducer from "./uploadSlice";
+import dataInfoReducer from "./dataInfoSlice";
 
 export default {
-  upload: uploadReducer,
+  dataInfo: dataInfoReducer,
 };

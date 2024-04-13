@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { uploadFileApi } from "../../api/upload.api";
+import {
+  deleteRowsWithMissingValuesApi,
+  uploadFileApi,
+} from "../../api/dataset.api";
 
 interface IngredientsState {
   data: {
@@ -26,15 +29,26 @@ const initialState: IngredientsState = {
 };
 
 export const uploadFile: any = createAsyncThunk(
-  "upload/uploadFile",
+  "dataInfo/uploadFile",
   async (file: any) => {
     const data = await uploadFileApi(file, "/process-csv/");
     return data;
   }
 );
 
-const uploadSlice = createSlice({
-  name: "upload",
+export const deletingRowsWithMissingValues: any = createAsyncThunk(
+  "dataInfo/deletingRows",
+  async (requestData: any) => {
+    const data = await deleteRowsWithMissingValuesApi(
+      requestData,
+      "/delete_missing_row/"
+    );
+    return data;
+  }
+);
+
+const dataInfoSlice = createSlice({
+  name: "dataInfo",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -48,8 +62,18 @@ const uploadSlice = createSlice({
       })
       .addCase(uploadFile.rejected, (state) => {
         state.loading = "failed";
+      })
+      .addCase(deletingRowsWithMissingValues.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(deletingRowsWithMissingValues.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(deletingRowsWithMissingValues.rejected, (state) => {
+        state.loading = "failed";
       });
   },
 });
 
-export default uploadSlice.reducer;
+export default dataInfoSlice.reducer;
