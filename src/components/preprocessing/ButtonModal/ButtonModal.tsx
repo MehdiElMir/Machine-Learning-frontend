@@ -7,7 +7,7 @@ const ButtonModal: React.FC = () => {
 
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button type="primary" onClick={() => setOpen(true)} block>
         Preview of the dataset
       </Button>
       <Modal

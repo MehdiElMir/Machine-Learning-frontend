@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 export const ChartCard = styled(Card)`
   width: 100%;
-  height: 18rem;
   position: relative;
-  border: 1px solid var(--text-sider-secondary-color);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   background-color: transparent;
 `;

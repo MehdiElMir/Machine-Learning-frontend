@@ -1,4 +1,4 @@
-import { Card, Col, Row, Statistic } from "antd";
+import { Card, Col, Row, Space, Statistic } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -15,11 +15,11 @@ export const PreprocessingPage: React.FC = () => {
 
   return (
     <>
-      <Row gutter={[16, 16]}>
-        <Col span={6} sm={12} xs={24} md={6}>
+      <Row gutter={[16, 16]} style={{ marginBottom: "30px" }}>
+        <Col span={8} sm={12} xs={24} md={8}>
           <Card
             bordered={false}
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+            style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
           >
             <Statistic
               title="Number of rows"
@@ -29,10 +29,10 @@ export const PreprocessingPage: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6} sm={12} xs={24} md={6}>
+        <Col span={8} sm={12} xs={24} md={8}>
           <Card
             bordered={false}
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+            style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
           >
             <Statistic
               title="Number of features"
@@ -42,10 +42,10 @@ export const PreprocessingPage: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={6} sm={12} xs={24} md={6}>
+        <Col span={8} sm={12} xs={24} md={8}>
           <Card
             bordered={false}
-            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+            style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
           >
             <Statistic
               title="Percentage of missing values"
@@ -56,20 +56,29 @@ export const PreprocessingPage: React.FC = () => {
             />
           </Card>
         </Col>
-        <S.ButtonCol span={6} sm={12} xs={24} md={6}>
-          <ButtonModal />
-        </S.ButtonCol>
       </Row>
 
-      <Row>
-        <Col span={12}>
-          <DeleteRowsButton />
-        </Col>
+      <Row gutter={[16, 16]}>
         <Col span={12}>
           <BarPlotChart
             title="Missing values"
             data={data.missing_percentage}
           ></BarPlotChart>
+        </Col>
+        <Col span={12}>
+          <Card
+            bordered={false}
+            style={{ boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px" }}
+          >
+            <Space
+              direction="vertical"
+              size="middle"
+              style={{ display: "flex" }}
+            >
+              <ButtonModal />
+              <DeleteRowsButton />
+            </Space>
+          </Card>
         </Col>
       </Row>
     </>

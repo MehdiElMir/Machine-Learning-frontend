@@ -1,4 +1,4 @@
-import { Button, Popconfirm, PopconfirmProps } from "antd";
+import { App, Button, Popconfirm, PopconfirmProps, message } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -9,6 +9,7 @@ export const DeleteRowsButton: React.FC = () => {
     data: { dataset },
   } = useSelector((state: RootState) => state.dataInfo);
   const dispatch = useDispatch();
+  const { notification } = App.useApp();
 
   const handleButton = () => {
     const requestData = {
@@ -16,6 +17,11 @@ export const DeleteRowsButton: React.FC = () => {
     };
     console.log(requestData);
     dispatch(deletingRowsWithMissingValues(requestData));
+    notification.success({
+      message: `Notification topLeft`,
+      description: "Hello, Ant Design!!",
+      placement: "bottomRight",
+    });
   };
 
   const confirm: PopconfirmProps["onConfirm"] = (e) => {
@@ -33,7 +39,9 @@ export const DeleteRowsButton: React.FC = () => {
       okText="Yes"
       cancelText="No"
     >
-      <Button type="primary">Deleting Rows</Button>
+      <Button type="primary" block>
+        Deleting rows with missing values
+      </Button>
     </Popconfirm>
   );
 };
