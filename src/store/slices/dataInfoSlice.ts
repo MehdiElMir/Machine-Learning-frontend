@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   deleteRowsWithMissingValuesApi,
+  deleteSelectedColumnsApi,
   uploadFileApi,
 } from "../../api/dataset.api";
 
@@ -46,6 +47,16 @@ export const deletingRowsWithMissingValues: any = createAsyncThunk(
     return data;
   }
 );
+export const deletingSelectedColumns: any = createAsyncThunk(
+  "dataInfo/deletingColumns",
+  async (requestData: any) => {
+    const data = await deleteSelectedColumnsApi(
+      requestData,
+      "/delete_selected_columns/"
+    );
+    return data;
+  }
+);
 
 const dataInfoSlice = createSlice({
   name: "dataInfo",
@@ -72,7 +83,17 @@ const dataInfoSlice = createSlice({
       })
       .addCase(deletingRowsWithMissingValues.rejected, (state) => {
         state.loading = "failed";
-      });
+      })
+      .addCase(deletingSelectedColumns.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(deletingSelectedColumns.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(deletingSelectedColumns.rejected, (state) => {
+        state.loading = "failed";
+      });;
   },
 });
 

@@ -9,6 +9,7 @@ import ButtonModal from "../../components/preprocessing/ButtonModal/ButtonModal"
 import * as S from "./Preprocessing.styles";
 import { BarPlotChart } from "../../components/preprocessing/BarPlotChart/BarPlotChart";
 import DeleteRowsButton from "../../components/preprocessing/deleteRowsButton/DeleteRowsButton";
+import ColumnsForm from "../../components/preprocessing/ColumnsForm/ColumnsForm";
 
 export const PreprocessingPage: React.FC = () => {
   const { data } = useSelector((state: RootState) => state.dataInfo);
@@ -75,8 +76,10 @@ export const PreprocessingPage: React.FC = () => {
               size="middle"
               style={{ display: "flex" }}
             >
+              {/* Components group */}
               <ButtonModal />
               <DeleteRowsButton />
+              <ColumnsForm/>
             </Space>
           </Card>
         </Col>
