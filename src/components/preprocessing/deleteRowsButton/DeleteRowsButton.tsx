@@ -33,7 +33,7 @@ export const DeleteRowsButton: React.FC = () => {
       okText="Yes"
       cancelText="No"
     >
-      <Button type="primary" block>
+      <Button type="primary" block danger>
         Deleting rows with missing values
       </Button>
     </Popconfirm>

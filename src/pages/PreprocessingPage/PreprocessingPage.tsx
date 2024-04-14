@@ -78,8 +78,9 @@ export const PreprocessingPage: React.FC = () => {
             >
               {/* Components group */}
               <ButtonModal />
+
               <DeleteRowsButton />
-              <ColumnsForm/>
+              <ColumnsForm />
             </Space>
           </Card>
         </Col>

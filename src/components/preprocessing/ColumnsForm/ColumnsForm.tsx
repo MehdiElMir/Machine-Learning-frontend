@@ -38,9 +38,14 @@ const ColumnsForm: React.FC = () => {
   return (
     <Form
       name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 24 }}
-      style={{ maxWidth: 600 }}
+      style={{
+        width: "100%",
+        padding: "10px",
+        background: `linear-gradient(white, white) padding-box,
+      linear-gradient(to right, #11b8fc, #6047ed) border-box`,
+        border: "3px dashed #ffffff",
+        borderRadius: "7px",
+      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -54,8 +59,8 @@ const ColumnsForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type="primary" htmlType="submit" block>
-          Delete
+        <Button type="primary" htmlType="submit" block danger>
+          Delete selected columns
         </Button>
       </Form.Item>
     </Form>

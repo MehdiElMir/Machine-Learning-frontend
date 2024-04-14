@@ -9,6 +9,7 @@ import { PreprocessingPage } from "./pages/PreprocessingPage/PreprocessingPage";
 import { LinearRegressionPage } from "./pages/LinearRegression/LinearRegression";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { ConfigProvider } from "antd";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,18 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#6047ed",
+          fontFamily: "Roboto",
+        },
+      }}
+    >
+      <RouterProvider router={router}></RouterProvider>
+    </ConfigProvider>
+  );
 }
 
 export default App;
