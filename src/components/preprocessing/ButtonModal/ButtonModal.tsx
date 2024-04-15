@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import PreviewTable from "../PreviewTable/PreviewTable";
+import { EyeFilled } from "@ant-design/icons";
 
 const ButtonModal: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)} block>
+      <Button
+        icon={<EyeFilled />}
+        type="primary"
+        onClick={() => setOpen(true)}
+        block
+      >
         Preview of the dataset
       </Button>
       <Modal

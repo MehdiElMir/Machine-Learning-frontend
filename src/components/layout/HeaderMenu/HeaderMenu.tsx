@@ -49,7 +49,6 @@ const HeaderMenu: React.FC = () => {
       style={{
         paddingLeft: "30px",
         paddingRight: "30px",
-        width: "100%",
         borderRadius: "7px",
       }}
     />

@@ -1,7 +1,8 @@
 import React from "react";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Button, Layout, Menu, theme } from "antd";
 import HeaderMenu from "./HeaderMenu/HeaderMenu";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { FileAddFilled } from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 
@@ -14,6 +15,7 @@ const AppLayout: React.FC = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const navigate = useNavigate();
 
   return (
     <Layout>
@@ -27,13 +29,22 @@ const AppLayout: React.FC = () => {
           display: "flex",
           alignItems: "center",
           height: "60px",
-          justifyContent: "center",
+          justifyContent: "space-between",
           paddingBottom: "10px",
           marginTop: "10px",
         }}
       >
         <div className="demo-logo" />
         <HeaderMenu />
+        <Button
+          type="primary"
+          icon={<FileAddFilled />}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Try a new file
+        </Button>
       </Header>
       <Content
         style={{
