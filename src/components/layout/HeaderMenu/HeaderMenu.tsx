@@ -21,8 +21,14 @@ const items: MenuProps["items"] = [
     icon: <SettingOutlined />,
     children: [
       {
-        label: <Link to={"linear-regression"}>Linear Regression</Link>,
-        key: "setting:1",
+        label: "Linear Regression",
+        key: "linear-regression",
+        children: [
+          {
+            label: <Link to={"2d-linear-regression"}>2D</Link>,
+            key: "2D",
+          },
+        ],
       },
       {
         label: "Option 2",

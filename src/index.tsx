@@ -10,27 +10,6 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <UploadPage />,
-  },
-  {
-    path: "/app/",
-    element: <AppLayout />,
-    children: [
-      {
-        path: "preprocessing",
-        element: <PreprocessingPage />,
-      },
-      {
-        path: "linear-regression",
-        element: <LinearRegressionPage />,
-      },
-    ],
-  },
-]);
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

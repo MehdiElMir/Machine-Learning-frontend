@@ -68,7 +68,6 @@ export const deleteRowsWithMissingValuesApi = async (
     console.error("Deleting rows failed", error);
     throw error.response?.data || "Deleting rows failed";
   }
-  
 };
 
 export const deleteSelectedColumnsApi = async (
@@ -87,3 +86,18 @@ export const deleteSelectedColumnsApi = async (
   }
 };
 
+export const imputateSelectedColumnsApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("Imputation of selected Columns failed", error);
+    throw error.response?.data || "Imputation of selected Columns failed";
+  }
+};

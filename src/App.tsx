@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <PreprocessingPage />,
       },
       {
-        path: "linear-regression",
+        path: "2d-linear-regression",
         element: <LinearRegressionPage />,
       },
     ],

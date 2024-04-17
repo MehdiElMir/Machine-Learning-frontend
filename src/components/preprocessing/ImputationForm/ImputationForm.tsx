@@ -12,11 +12,14 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { deletingSelectedColumns } from "../../../store/slices/dataInfoSlice";
-import { DeleteFilled } from "@ant-design/icons";
+import {
+  deletingSelectedColumns,
+  imputateSelectedColumns,
+} from "../../../store/slices/dataInfoSlice";
+import { DeleteFilled, PlusCircleFilled } from "@ant-design/icons";
 
 type FieldType = {
-  columns_to_delete?: string;
+  column_to_imputate?: string;
   option?: string;
 };
 
@@ -36,9 +39,10 @@ const ImputationForm: React.FC = () => {
     console.log(values);
     const requestBody = {
       dataset: dataset,
-      columns_to_delete: values.columns_to_delete,
+      selected_columns: values.column_to_imputate,
+      option: values.option,
     };
-    dispatch(deletingSelectedColumns(requestBody));
+    dispatch(imputateSelectedColumns(requestBody));
   };
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -49,7 +53,7 @@ const ImputationForm: React.FC = () => {
   return (
     <Form
       layout="vertical"
-      name="basic"
+      name="imputation"
       style={{
         width: "100%",
         padding: "10px",
@@ -57,6 +61,9 @@ const ImputationForm: React.FC = () => {
       linear-gradient(to right, #11b8fc, #6047ed) border-box`,
         border: "3px dashed #ffffff",
         borderRadius: "7px",
+      }}
+      initialValues={{
+        ["option"]: "Mean",
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -69,7 +76,7 @@ const ImputationForm: React.FC = () => {
         <Col span={12}>
           <Form.Item<FieldType>
             label="Column to imputate"
-            name="columns_to_delete"
+            name="column_to_imputate"
             rules={[{ required: true, message: "Please select some columns" }]}
           >
             <Radio.Group options={dynamiqueOptions} />
@@ -82,7 +89,6 @@ const ImputationForm: React.FC = () => {
             rules={[{ required: true, message: "Please select some columns" }]}
           >
             <Select
-              defaultValue="Mean"
               style={{ width: "100%" }}
               options={[
                 { value: "Mean", label: "Mean" },
@@ -96,7 +102,7 @@ const ImputationForm: React.FC = () => {
 
       <Form.Item wrapperCol={{ span: 24 }}>
         <Row justify={"end"}>
-          <Button icon={<DeleteFilled />} type="primary" htmlType="submit">
+          <Button icon={<PlusCircleFilled />} type="primary" htmlType="submit">
             Imputate
           </Button>
         </Row>

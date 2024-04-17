@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   deleteRowsWithMissingValuesApi,
   deleteSelectedColumnsApi,
+  imputateSelectedColumnsApi,
   uploadFileApi,
 } from "../../api/dataset.api";
 import { notificationController } from "../../controllers/notificationController";
@@ -65,6 +66,27 @@ export const deletingSelectedColumns: any = createAsyncThunk(
   }
 );
 
+export const imputateSelectedColumns: any = createAsyncThunk(
+  "dataInfo/imputateColumns",
+  async (requestData: any) => {
+    try {
+      const data = await imputateSelectedColumnsApi(
+        requestData,
+        "/imputate_selected_column/"
+      );
+      notificationController.success({
+        message: "Column imputated successfully",
+      });
+      return data;
+    } catch (e) {
+      notificationController.error({
+        message: `${e} due to column's type. Try another Mode method`,
+      });
+      throw e;
+    }
+  }
+);
+
 const dataInfoSlice = createSlice({
   name: "dataInfo",
   initialState,
@@ -99,6 +121,16 @@ const dataInfoSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(deletingSelectedColumns.rejected, (state) => {
+        state.loading = "failed";
+      })
+      .addCase(imputateSelectedColumns.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(imputateSelectedColumns.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(imputateSelectedColumns.rejected, (state) => {
         state.loading = "failed";
       });
   },
