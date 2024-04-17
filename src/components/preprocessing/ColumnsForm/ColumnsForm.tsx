@@ -11,6 +11,7 @@ type FieldType = {
 };
 
 const ColumnsForm: React.FC = () => {
+  const [form] = Form.useForm();
   const {
     data: { missing_percentage, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
@@ -29,6 +30,7 @@ const ColumnsForm: React.FC = () => {
       columns_to_delete: values.columns_to_delete,
     };
     dispatch(deletingSelectedColumns(requestBody));
+    form.resetFields();
   };
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -38,6 +40,7 @@ const ColumnsForm: React.FC = () => {
 
   return (
     <Form
+      form={form}
       layout="vertical"
       name="basic"
       style={{

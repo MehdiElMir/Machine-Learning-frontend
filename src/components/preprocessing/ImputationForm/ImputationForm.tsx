@@ -27,6 +27,7 @@ const ImputationForm: React.FC = () => {
   const {
     data: { missing_percentage, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const dynamiqueOptions: any = [];
@@ -43,6 +44,7 @@ const ImputationForm: React.FC = () => {
       option: values.option,
     };
     dispatch(imputateSelectedColumns(requestBody));
+    form.resetFields();
   };
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -86,7 +88,7 @@ const ImputationForm: React.FC = () => {
           <Form.Item<FieldType>
             label="Method of imputation"
             name="option"
-            rules={[{ required: true, message: "Please select some columns" }]}
+            rules={[{ required: true, message: "Please select a method" }]}
           >
             <Select
               style={{ width: "100%" }}

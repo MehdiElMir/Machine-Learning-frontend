@@ -25,7 +25,7 @@ const PreviewTable: React.FC = () => {
     }));
     setColumns(cols);
     setDataSource(dataset);
-  }, []);
+  }, [dataset]);
 
   return (
     <Table
