@@ -1,14 +1,19 @@
-import { notification } from 'antd';
-import styled from 'styled-components';
-import { CheckCircleFilled, ExclamationCircleFilled, InfoCircleFilled, StopFilled } from '@ant-design/icons';
-import { ArgsProps } from 'antd/lib/notification';
+import { notification } from "antd";
+import styled from "styled-components";
+import {
+  CheckCircleFilled,
+  ExclamationCircleFilled,
+  InfoCircleFilled,
+  StopFilled,
+} from "@ant-design/icons";
+import { ArgsProps } from "antd/lib/notification";
 
 interface IconWrapperProps {
   $isOnlyTitle: boolean;
 }
 
 const IconWrapper = styled.div<IconWrapperProps>`
-  font-size: ${(props) => (props.$isOnlyTitle ? '2rem' : '3rem')};
+  font-size: ${(props) => (props.$isOnlyTitle ? "2rem" : "3rem")};
   line-height: 2rem;
 `;
 
@@ -21,14 +26,26 @@ type NotificationProps = ArgsProps;
 const openSuccessNotification = (config: NotificationProps): void => {
   notification.success({
     ...config,
+    placement: "bottomRight",
     icon: (
       <IconWrapper $isOnlyTitle={!config.description}>
-        <CheckCircleFilled className="success-icon" rev={undefined} />
+        <CheckCircleFilled style={{ color: "#30AF5B" }} rev={undefined} />
       </IconWrapper>
     ),
-    message: <div className={`title ${!config.description && `title-only`}`}>{config.message}</div>,
-    description: config.description ? <div className="description">{config.description}</div> : <EmptyDescription />,
-    className: config.description ? '' : 'notification-without-description',
+    message: (
+      <div
+        style={{ paddingLeft: "1rem" }}
+        className={`title ${!config.description && `title-only`}`}
+      >
+        {config.message}
+      </div>
+    ),
+    description: config.description ? (
+      <div className="description">{config.description}</div>
+    ) : (
+      <EmptyDescription />
+    ),
+    className: config.description ? "" : "notification-without-description",
   });
 };
 
@@ -37,12 +54,20 @@ const openInfoNotification = (config: NotificationProps): void => {
     ...config,
     icon: (
       <IconWrapper $isOnlyTitle={!config.description}>
-        <InfoCircleFilled className="info-icon" rev={undefined} />
+        <InfoCircleFilled style={{ color: "#30AF5B" }} rev={undefined} />
       </IconWrapper>
     ),
-    message: <div className={`title ${!config.description && `title-only`}`}>{config.message}</div>,
-    description: config.description ? <div className="description">{config.description}</div> : <EmptyDescription />,
-    className: config.description ? '' : 'notification-without-description',
+    message: (
+      <div className={`title ${!config.description && `title-only`}`}>
+        {config.message}
+      </div>
+    ),
+    description: config.description ? (
+      <div className="description">{config.description}</div>
+    ) : (
+      <EmptyDescription />
+    ),
+    className: config.description ? "" : "notification-without-description",
   });
 };
 
@@ -51,12 +76,20 @@ const openWarningNotification = (config: NotificationProps): void => {
     ...config,
     icon: (
       <IconWrapper $isOnlyTitle={!config.description}>
-        <ExclamationCircleFilled className="warning-icon" rev={undefined} />
+        <ExclamationCircleFilled style={{ color: "FF5252" }} rev={undefined} />
       </IconWrapper>
     ),
-    message: <div className={`title ${!config.description && `title-only`}`}>{config.message}</div>,
-    description: config.description ? <div className="description">{config.description}</div> : <EmptyDescription />,
-    className: config.description ? '' : 'notification-without-description',
+    message: (
+      <div className={`title ${!config.description && `title-only`}`}>
+        {config.message}
+      </div>
+    ),
+    description: config.description ? (
+      <div className="description">{config.description}</div>
+    ) : (
+      <EmptyDescription />
+    ),
+    className: config.description ? "" : "notification-without-description",
   });
 };
 
@@ -65,12 +98,20 @@ const openErrorNotification = (config: NotificationProps): void => {
     ...config,
     icon: (
       <IconWrapper $isOnlyTitle={!config.description}>
-        <StopFilled className="error-icon" rev={undefined} />
+        <StopFilled style={{ color: "#FF5252" }} rev={undefined} />
       </IconWrapper>
     ),
-    message: <div className={`title ${!config.description && `title-only`}`}>{config.message}</div>,
-    description: config.description ? <div className="description">{config.description}</div> : <EmptyDescription />,
-    className: config.description ? '' : 'notification-without-description',
+    message: (
+      <div className={`title ${!config.description && `title-only`}`}>
+        {config.message}
+      </div>
+    ),
+    description: config.description ? (
+      <div className="description">{config.description}</div>
+    ) : (
+      <EmptyDescription />
+    ),
+    className: config.description ? "" : "notification-without-description",
   });
 };
 

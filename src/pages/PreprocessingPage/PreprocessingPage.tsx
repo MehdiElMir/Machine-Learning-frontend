@@ -10,6 +10,7 @@ import * as S from "./Preprocessing.styles";
 import { BarPlotChart } from "../../components/preprocessing/BarPlotChart/BarPlotChart";
 import DeleteRowsButton from "../../components/preprocessing/deleteRowsButton/DeleteRowsButton";
 import ColumnsForm from "../../components/preprocessing/ColumnsForm/ColumnsForm";
+import ImputationForm from "../../components/preprocessing/ImputationForm/ImputationForm";
 
 export const PreprocessingPage: React.FC = () => {
   const { data } = useSelector((state: RootState) => state.dataInfo);
@@ -49,11 +50,10 @@ export const PreprocessingPage: React.FC = () => {
             style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
           >
             <Statistic
-              title="Missing values"
-              value={Number(data.total_missing_percentage.toFixed(2))}
+              title="Rows with missing values"
+              value={`${data.total_missing_percentage} / ${data.num_rows}`}
               valueStyle={{ color: "#d75740" }}
               prefix={<AiFillQuestionCircle style={{ marginRight: "1rem" }} />}
-              suffix="%"
             />
           </Card>
         </Col>
@@ -79,6 +79,7 @@ export const PreprocessingPage: React.FC = () => {
               {/* Components group */}
               <ButtonModal />
               <ColumnsForm />
+              <ImputationForm />
               <DeleteRowsButton />
             </Space>
           </Card>

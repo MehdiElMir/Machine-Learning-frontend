@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { deletingRowsWithMissingValues } from "../../../store/slices/dataInfoSlice";
+import { DeleteFilled } from "@ant-design/icons";
 
 export const DeleteRowsButton: React.FC = () => {
   const {
@@ -27,13 +28,20 @@ export const DeleteRowsButton: React.FC = () => {
   return (
     <Popconfirm
       title="Delete the rows"
-      description="It is not recommanded when the number of rows is big. Do you want to proceed? "
+      description="It is not recommanded for model training when the number of rows with missing values is too big as it will impace the results! Do you want to proceed? "
       onConfirm={confirm}
       onCancel={cancel}
       okText="Yes"
       cancelText="No"
+      overlayStyle={{ width: 300 }}
     >
-      <Button type="primary" block danger>
+      <Button
+        icon={<DeleteFilled />}
+        type="primary"
+        style={{ border: "2px solid" }}
+        block
+        danger
+      >
         Deleting rows with missing values
       </Button>
     </Popconfirm>

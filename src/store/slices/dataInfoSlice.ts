@@ -4,6 +4,7 @@ import {
   deleteSelectedColumnsApi,
   uploadFileApi,
 } from "../../api/dataset.api";
+import { notificationController } from "../../controllers/notificationController";
 
 interface DataInfoState {
   data: {
@@ -44,6 +45,9 @@ export const deletingRowsWithMissingValues: any = createAsyncThunk(
       requestData,
       "/delete_missing_row/"
     );
+    notificationController.success({
+      message: "Rows with missing values deleted successfully",
+    });
     return data;
   }
 );
@@ -54,6 +58,9 @@ export const deletingSelectedColumns: any = createAsyncThunk(
       requestData,
       "/delete_selected_columns/"
     );
+    notificationController.success({
+      message: "Column(s) deleted successfully",
+    });
     return data;
   }
 );
@@ -93,7 +100,7 @@ const dataInfoSlice = createSlice({
       })
       .addCase(deletingSelectedColumns.rejected, (state) => {
         state.loading = "failed";
-      });;
+      });
   },
 });
 

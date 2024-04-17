@@ -7,6 +7,7 @@ import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { uploadFile } from "../../store/slices/dataInfoSlice";
+import { notificationController } from "../../controllers/notificationController";
 
 function UploadPage() {
   const { Dragger } = Upload;
@@ -21,13 +22,15 @@ function UploadPage() {
     method: "POST",
     multiple: false,
     beforeUpload: (file) => {
-      message.success(`${file.name} file added successfully.`);
       console.log({ file });
       const formData = new FormData();
       formData.append("file", file);
       console.log(formData);
       dispatch(uploadFile(formData))
         .then(() => {
+          notificationController.success({
+            message: `${file.name} file uploaded successfully.`,
+          });
           navigate("/app/preprocessing");
         })
         .catch((error: any) => {

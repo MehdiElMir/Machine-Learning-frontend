@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
 import type { GetProp } from "antd";
-import { Button, Checkbox, Form, Row, type FormProps } from "antd";
+import {
+  Button,
+  Checkbox,
+  Col,
+  Form,
+  Radio,
+  Row,
+  Select,
+  type FormProps,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { deletingSelectedColumns } from "../../../store/slices/dataInfoSlice";
@@ -8,9 +17,10 @@ import { DeleteFilled } from "@ant-design/icons";
 
 type FieldType = {
   columns_to_delete?: string;
+  option?: string;
 };
 
-const ColumnsForm: React.FC = () => {
+const ImputationForm: React.FC = () => {
   const {
     data: { missing_percentage, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
@@ -53,25 +63,41 @@ const ColumnsForm: React.FC = () => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Delete selected columns
+        Imputate missing values
       </p>
-      <Form.Item<FieldType>
-        label="Columns to delete"
-        name="columns_to_delete"
-        rules={[{ required: true, message: "Please select some columns" }]}
-      >
-        <Checkbox.Group options={dynamiqueOptions} />
-      </Form.Item>
+      <Row>
+        <Col span={12}>
+          <Form.Item<FieldType>
+            label="Column to imputate"
+            name="columns_to_delete"
+            rules={[{ required: true, message: "Please select some columns" }]}
+          >
+            <Radio.Group options={dynamiqueOptions} />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<FieldType>
+            label="Method of imputation"
+            name="option"
+            rules={[{ required: true, message: "Please select some columns" }]}
+          >
+            <Select
+              defaultValue="Mean"
+              style={{ width: "100%" }}
+              options={[
+                { value: "Mean", label: "Mean" },
+                { value: "Mode", label: "Mode" },
+                { value: "Mediane", label: "Mediane" },
+              ]}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
 
       <Form.Item wrapperCol={{ span: 24 }}>
         <Row justify={"end"}>
-          <Button
-            icon={<DeleteFilled />}
-            type="primary"
-            htmlType="submit"
-            danger
-          >
-            Delete
+          <Button icon={<DeleteFilled />} type="primary" htmlType="submit">
+            Imputate
           </Button>
         </Row>
       </Form.Item>
@@ -79,4 +105,4 @@ const ColumnsForm: React.FC = () => {
   );
 };
 
-export default ColumnsForm;
+export default ImputationForm;
