@@ -15,6 +15,7 @@ interface DataInfoState {
     total_missing_percentage: number;
     num_rows: number;
     num_columns: number;
+    numeric_columns_names: string[];
   };
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
@@ -27,6 +28,7 @@ const initialState: DataInfoState = {
     total_missing_percentage: 0,
     num_rows: 0,
     num_columns: 0,
+    numeric_columns_names: [],
   },
   loading: "idle",
 };

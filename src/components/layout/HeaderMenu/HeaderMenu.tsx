@@ -16,7 +16,7 @@ const items: MenuProps["items"] = [
     icon: <ImFilter />,
   },
   {
-    label: "Analyse",
+    label: "ML Regression",
     key: "SubMenu",
     icon: <SettingOutlined />,
     children: [
@@ -35,6 +35,11 @@ const items: MenuProps["items"] = [
         key: "setting:2",
       },
     ],
+  },
+  {
+    label: <NavLink to={"testing"}>Testing</NavLink>,
+    key: "test",
+    icon: <ImFilter />,
   },
 ];
 

@@ -10,6 +10,7 @@ import { LinearRegressionPage } from "./pages/LinearRegression/LinearRegression"
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ConfigProvider } from "antd";
+import { TestingPage } from "./pages/TestingPage/TestingPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "2d-linear-regression",
         element: <LinearRegressionPage />,
+      },
+      {
+        path: "testing",
+        element: <TestingPage />,
       },
     ],
   },

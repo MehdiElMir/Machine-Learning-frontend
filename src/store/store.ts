@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import dataInfoReducer from "./slices/dataInfoSlice";
+import linearRegressionReducer from "./slices/linearRegressionSlice";
 import { thunk } from "redux-thunk";
 
 const rootReducer = combineReducers({
   dataInfo: dataInfoReducer,
+  linearRegression: linearRegressionReducer,
 });
 
 const persistConfig = {
