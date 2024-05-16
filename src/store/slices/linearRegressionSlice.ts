@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { linearRegression2DApi } from "../../api/regression.api";
+import {
+  crossValidationApi,
+  decisionTreeApi,
+  knnClassificationApi,
+  linearRegression2DApi,
+} from "../../api/regression.api";
 import { notificationController } from "../../controllers/notificationController";
 
 interface LinearRegressionState {
@@ -11,7 +16,7 @@ const initialState: LinearRegressionState = {
 };
 
 export const linearRegression2D: any = createAsyncThunk(
-  "linearRegression/fetch2D",
+  "regression/fetch2D",
   async (requestData: any) => {
     try {
       const response = await linearRegression2DApi(
@@ -28,8 +33,59 @@ export const linearRegression2D: any = createAsyncThunk(
   }
 );
 
+export const decisionTree: any = createAsyncThunk(
+  "regression/fetchDecisionTree",
+  async (requestData: any) => {
+    try {
+      const response = await decisionTreeApi(requestData, "/decision_tree/");
+      return response;
+    } catch (e) {
+      notificationController.error({
+        message: `${e}`,
+      });
+      throw e;
+    }
+  }
+);
+
+export const crossValidation: any = createAsyncThunk(
+  "regression/fetchCrossValidation",
+  async (requestData: any) => {
+    try {
+      const response = await crossValidationApi(
+        requestData,
+        "/cross_validation/"
+      );
+      return response;
+    } catch (e) {
+      notificationController.error({
+        message: `${e}`,
+      });
+      throw e;
+    }
+  }
+);
+
+export const knnClassification: any = createAsyncThunk(
+  "regression/fetchKnnClassification",
+  async (requestData: any) => {
+    try {
+      const response = await knnClassificationApi(
+        requestData,
+        "/knn_classification/"
+      );
+      return response;
+    } catch (e) {
+      notificationController.error({
+        message: `${e}`,
+      });
+      throw e;
+    }
+  }
+);
+
 const linearRegressionSlice = createSlice({
-  name: "linearRegression",
+  name: "regression",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -41,6 +97,33 @@ const linearRegressionSlice = createSlice({
         state.loading = "succeeded";
       })
       .addCase(linearRegression2D.rejected, (state) => {
+        state.loading = "failed";
+      })
+      .addCase(crossValidation.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(crossValidation.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+      })
+      .addCase(crossValidation.rejected, (state) => {
+        state.loading = "failed";
+      })
+      .addCase(decisionTree.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(decisionTree.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+      })
+      .addCase(decisionTree.rejected, (state) => {
+        state.loading = "failed";
+      })
+      .addCase(knnClassification.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(knnClassification.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+      })
+      .addCase(knnClassification.rejected, (state) => {
         state.loading = "failed";
       });
   },

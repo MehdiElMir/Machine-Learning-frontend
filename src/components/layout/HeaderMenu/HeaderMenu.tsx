@@ -31,8 +31,16 @@ const items: MenuProps["items"] = [
         ],
       },
       {
-        label: "Option 2",
-        key: "setting:2",
+        label: <Link to={"CrossValidation"}>Cross Validation</Link>,
+        key: "CrossValidation",
+      },
+      {
+        label: <Link to={"DecisionTree"}>Decision Tree</Link>,
+        key: "DecisionTree",
+      },
+      {
+        label: <Link to={"KnnClassification"}>Knn Classification</Link>,
+        key: "KnnClassification",
       },
     ],
   },

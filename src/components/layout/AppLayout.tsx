@@ -2,7 +2,11 @@ import React from "react";
 import { Breadcrumb, Button, Layout, Menu, theme } from "antd";
 import HeaderMenu from "./HeaderMenu/HeaderMenu";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { FileAddFilled } from "@ant-design/icons";
+import {
+  DownloadOutlined,
+  FileAddFilled,
+  UploadOutlined,
+} from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 
@@ -36,15 +40,18 @@ const AppLayout: React.FC = () => {
       >
         <div className="demo-logo" />
         <HeaderMenu />
-        <Button
-          type="primary"
-          icon={<FileAddFilled />}
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Try a new file
-        </Button>
+        <div>
+          <Button
+            type="primary"
+            icon={<UploadOutlined />}
+            onClick={() => {
+              navigate("/");
+            }}
+            style={{ marginRight: "1rem" }}
+          >
+            Upload new file
+          </Button>
+        </div>
       </Header>
       <Content
         style={{

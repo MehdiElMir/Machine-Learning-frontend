@@ -53,3 +53,51 @@ export const linearRegression2DApi = async (
     throw error.response?.data || "generating linear regression 2D failed";
   }
 };
+
+export const crossValidationApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating cross validation failed", error);
+    throw error.response?.data || "generating cross validation failed";
+  }
+};
+
+export const decisionTreeApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating decision tree failed", error);
+    throw error.response?.data || "generating decision tree failed";
+  }
+};
+
+export const knnClassificationApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating knn Classification failed", error);
+    throw error.response?.data || "generating knn Classification failed";
+  }
+};

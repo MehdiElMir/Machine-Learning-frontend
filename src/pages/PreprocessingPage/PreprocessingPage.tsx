@@ -11,6 +11,7 @@ import { BarPlotChart } from "../../components/preprocessing/BarPlotChart/BarPlo
 import DeleteRowsButton from "../../components/preprocessing/deleteRowsButton/DeleteRowsButton";
 import ColumnsForm from "../../components/preprocessing/ColumnsForm/ColumnsForm";
 import ImputationForm from "../../components/preprocessing/ImputationForm/ImputationForm";
+import DataBalancingForm from "../../components/preprocessing/DataBalancingForm/DataBalancingForm";
 
 export const PreprocessingPage: React.FC = () => {
   const { data } = useSelector((state: RootState) => state.dataInfo);
@@ -65,6 +66,20 @@ export const PreprocessingPage: React.FC = () => {
             title="Missing values in each feature (%)"
             data={data.missing_percentage}
           ></BarPlotChart>
+          <Card
+            bordered={false}
+            style={{
+              boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
+              marginTop: "1rem",
+            }}
+          >
+            <Row>
+              <Col span={12}></Col>
+              <Col span={12}>
+                <DataBalancingForm />
+              </Col>
+            </Row>
+          </Card>
         </Col>
         <Col span={12} sm={24} xs={24} md={12}>
           <Card

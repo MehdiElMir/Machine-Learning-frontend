@@ -16,6 +16,7 @@ interface DataInfoState {
     num_rows: number;
     num_columns: number;
     numeric_columns_names: string[];
+    categorical_columns_names: string[];
   };
   loading: "idle" | "pending" | "succeeded" | "failed";
 }
@@ -29,6 +30,7 @@ const initialState: DataInfoState = {
     num_rows: 0,
     num_columns: 0,
     numeric_columns_names: [],
+    categorical_columns_names: []
   },
   loading: "idle",
 };

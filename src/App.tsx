@@ -11,6 +11,9 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ConfigProvider } from "antd";
 import { TestingPage } from "./pages/TestingPage/TestingPage";
+import { CrossValidationPage } from "./pages/CrossValidationPage/CrossValdationPage";
+import { DecisionTreePage } from "./pages/DecisionTreePage/DecisionTreePage";
+import { KnnClassificationPage } from "./pages/KnnClassificationPage/KnnClassificationPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,18 @@ const router = createBrowserRouter([
       {
         path: "2d-linear-regression",
         element: <LinearRegressionPage />,
+      },
+      {
+        path: "crossValidation",
+        element: <CrossValidationPage />,
+      },
+      {
+        path: "DecisionTree",
+        element: <DecisionTreePage />,
+      },
+      {
+        path: "KnnClassification",
+        element: <KnnClassificationPage />,
       },
       {
         path: "testing",
