@@ -3,7 +3,13 @@ import type { GetProp } from "antd";
 import { Button, Checkbox, Form, Row, Select, type FormProps } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { deletingSelectedColumns } from "../../../store/slices/dataInfoSlice";
+import {
+  deletingSelectedColumns,
+  fetchValuesCount,
+  overSampling,
+  resetBalanceValues,
+  underSampling,
+} from "../../../store/slices/dataInfoSlice";
 import { FaBalanceScale } from "react-icons/fa";
 
 type FieldType = {
@@ -14,7 +20,7 @@ type FieldType = {
 const DataBalancingForm: React.FC = () => {
   const [form] = Form.useForm();
   const {
-    data: { missing_percentage, dataset },
+    data: { categorical_columns_names, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
   const dispatch = useDispatch();
 
@@ -25,7 +31,7 @@ const DataBalancingForm: React.FC = () => {
 
   const dynamiqueOptions: any = [];
 
-  Object.keys(missing_percentage).forEach((o) => {
+  categorical_columns_names.forEach((o) => {
     dynamiqueOptions.push({ label: o, value: o });
   });
 
@@ -35,9 +41,23 @@ const DataBalancingForm: React.FC = () => {
       dataset: dataset,
       target: values.target,
     };
-    dispatch(deletingSelectedColumns(requestBody));
+    console.log(requestBody.dataset.length);
+    if (values.method == "OverSampling") {
+      dispatch(overSampling(requestBody));
+    } else if (values.method == "UnderSampling") {
+      dispatch(underSampling(requestBody));
+    }
+    dispatch(resetBalanceValues());
+
+    const requestBody2 = {
+      dataset: dataset,
+      target: values.target,
+    };
+    console.log(requestBody2.dataset.length);
+    dispatch(fetchValuesCount(requestBody2));
     form.resetFields();
   };
+
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
   ) => {

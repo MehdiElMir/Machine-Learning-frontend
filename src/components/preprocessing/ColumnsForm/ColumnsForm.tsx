@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import type { GetProp } from "antd";
-import { Button, Checkbox, Form, Row, type FormProps } from "antd";
+import { Button, Checkbox, Form, Row, Select, type FormProps } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { deletingSelectedColumns } from "../../../store/slices/dataInfoSlice";
@@ -63,7 +63,7 @@ const ColumnsForm: React.FC = () => {
         name="columns_to_delete"
         rules={[{ required: true, message: "Please select some columns" }]}
       >
-        <Checkbox.Group options={dynamiqueOptions} />
+        <Select mode="multiple" options={dynamiqueOptions} />
       </Form.Item>
 
       <Form.Item wrapperCol={{ span: 24 }}>

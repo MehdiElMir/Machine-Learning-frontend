@@ -8,17 +8,19 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { Link, NavLink } from "react-router-dom";
 import { ImFilter } from "react-icons/im";
+import { LuLineChart } from "react-icons/lu";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 const items: MenuProps["items"] = [
   {
     label: <NavLink to={"preprocessing"}>Pre-processing</NavLink>,
     key: "mail",
-    icon: <ImFilter />,
+    icon: <FaWandMagicSparkles />,
   },
   {
-    label: "ML Regression",
+    label: "Machine Learning Models",
     key: "SubMenu",
-    icon: <SettingOutlined />,
+    icon: <LuLineChart />,
     children: [
       {
         label: "Linear Regression",

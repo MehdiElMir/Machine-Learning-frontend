@@ -7,3 +7,11 @@ export const ButtonCol = styled(Col)`
   justify-content: center;
   align-items: center;
 `;
+
+export const MessageInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  height: 380px;
+`;

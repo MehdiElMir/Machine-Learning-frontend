@@ -101,3 +101,51 @@ export const imputateSelectedColumnsApi = async (
     throw error.response?.data || "Imputation of selected Columns failed";
   }
 };
+
+export const fetchValuesCountsApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("fetch values counts failed", error);
+    throw error.response?.data || "fetch values counts failed";
+  }
+};
+
+export const underSamplingApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("UnderSampling failed", error);
+    throw error.response?.data || "UnderSampling failed";
+  }
+};
+
+export const overSamplingApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("OverSampling failed", error);
+    throw error.response?.data || "OverSampling failed";
+  }
+};

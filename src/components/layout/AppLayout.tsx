@@ -7,6 +7,8 @@ import {
   FileAddFilled,
   UploadOutlined,
 } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { resetBalanceValues } from "../../store/slices/dataInfoSlice";
 
 const { Header, Content, Footer } = Layout;
 
@@ -20,6 +22,7 @@ const AppLayout: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Layout>
@@ -45,6 +48,7 @@ const AppLayout: React.FC = () => {
             type="primary"
             icon={<UploadOutlined />}
             onClick={() => {
+              dispatch(resetBalanceValues());
               navigate("/");
             }}
             style={{ marginRight: "1rem" }}

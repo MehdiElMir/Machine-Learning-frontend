@@ -74,14 +74,14 @@ const ImputationForm: React.FC = () => {
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
         Imputate missing values
       </p>
-      <Row>
+      <Row gutter={16}>
         <Col span={12}>
           <Form.Item<FieldType>
             label="Column to imputate"
             name="column_to_imputate"
             rules={[{ required: true, message: "Please select some columns" }]}
           >
-            <Radio.Group options={dynamiqueOptions} />
+            <Select options={dynamiqueOptions} />
           </Form.Item>
         </Col>
         <Col span={12}>
