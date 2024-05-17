@@ -5,6 +5,8 @@ import {
   Checkbox,
   Col,
   Form,
+  Input,
+  InputNumber,
   Radio,
   Row,
   Select,
@@ -26,6 +28,7 @@ import { AiFillPlayCircle } from "react-icons/ai";
 type FieldType = {
   features?: string;
   target?: string;
+  N_FOLD?: number;
 };
 
 interface Props {
@@ -51,6 +54,7 @@ const CrossValidationForm: React.FC<Props> = ({ setPlotData }) => {
       dataset: dataset,
       features: values.features,
       target: values.target,
+      N_FOLD: values.N_FOLD,
     };
     console.log(requestBody);
     const response = await dispatch(crossValidation(requestBody));
@@ -82,8 +86,8 @@ const CrossValidationForm: React.FC<Props> = ({ setPlotData }) => {
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
         Cross Validation
       </p>
-      <Row justify={"space-around"}>
-        <Col span={6}>
+      <Row gutter={16} justify={"space-between"}>
+        <Col span={8}>
           <Form.Item<FieldType>
             label="Features"
             name="features"
@@ -92,13 +96,22 @@ const CrossValidationForm: React.FC<Props> = ({ setPlotData }) => {
             <Select mode="multiple" options={dynamiqueOptions} allowClear />
           </Form.Item>
         </Col>
-        <Col span={6}>
+        <Col span={8}>
           <Form.Item<FieldType>
             label="Target"
             name="target"
             rules={[{ required: true, message: "Please select a target" }]}
           >
             <Select style={{ width: "100%" }} options={dynamiqueOptions} />
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item<FieldType>
+            label="N_FOLD"
+            name="N_FOLD"
+            rules={[{ required: true, message: "Please select NFold" }]}
+          >
+            <InputNumber />
           </Form.Item>
         </Col>
       </Row>

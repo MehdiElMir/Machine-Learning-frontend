@@ -46,11 +46,6 @@ const items: MenuProps["items"] = [
       },
     ],
   },
-  {
-    label: <NavLink to={"testing"}>Testing</NavLink>,
-    key: "test",
-    icon: <ImFilter />,
-  },
 ];
 
 const HeaderMenu: React.FC = () => {

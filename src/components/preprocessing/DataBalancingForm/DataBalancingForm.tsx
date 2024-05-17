@@ -35,25 +35,24 @@ const DataBalancingForm: React.FC = () => {
     dynamiqueOptions.push({ label: o, value: o });
   });
 
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log(values);
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    let response;
     const requestBody = {
       dataset: dataset,
       target: values.target,
     };
     console.log(requestBody.dataset.length);
     if (values.method == "OverSampling") {
-      dispatch(overSampling(requestBody));
+      response = await dispatch(overSampling(requestBody));
     } else if (values.method == "UnderSampling") {
-      dispatch(underSampling(requestBody));
+      response = await dispatch(underSampling(requestBody));
     }
     dispatch(resetBalanceValues());
-
     const requestBody2 = {
-      dataset: dataset,
+      dataset: response.payload.data,
       target: values.target,
     };
-    console.log(requestBody2.dataset.length);
+
     dispatch(fetchValuesCount(requestBody2));
     form.resetFields();
   };

@@ -41,7 +41,6 @@ const AppLayout: React.FC = () => {
           marginTop: "10px",
         }}
       >
-        <div className="demo-logo" />
         <HeaderMenu />
         <div>
           <Button
