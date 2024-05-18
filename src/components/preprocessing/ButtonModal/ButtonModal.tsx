@@ -9,12 +9,16 @@ const ButtonModal: React.FC = () => {
   return (
     <>
       <Button
+        style={{
+          marginRight: "1rem",
+          width: "8rem",
+          backgroundColor: "#5c7bd9",
+        }}
         icon={<EyeFilled />}
         type="primary"
         onClick={() => setOpen(true)}
-        block
       >
-        Preview of the dataset
+        Preview
       </Button>
       <Modal
         centered

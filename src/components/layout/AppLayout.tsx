@@ -7,9 +7,13 @@ import {
   FileAddFilled,
   UploadOutlined,
 } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetBalanceValues } from "../../store/slices/dataInfoSlice";
-
+import ButtonModal from "../preprocessing/ButtonModal/ButtonModal";
+import { FaFileUpload } from "react-icons/fa";
+import { convertToCSV } from "../../utils/convertToCsv";
+import { RootState } from "../../store/store";
+import { FaCloudDownloadAlt } from "react-icons/fa";
 const { Header, Content, Footer } = Layout;
 
 const items = new Array(3).fill(null).map((_, index) => ({
@@ -23,6 +27,21 @@ const AppLayout: React.FC = () => {
   } = theme.useToken();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { dataset } = useSelector((state: RootState) => state.dataInfo.data);
+
+  const handleDownload = () => {
+    const csv = convertToCSV(dataset);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "dataset.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <Layout>
@@ -43,16 +62,29 @@ const AppLayout: React.FC = () => {
       >
         <HeaderMenu />
         <div>
+          <ButtonModal />
           <Button
             type="primary"
-            icon={<UploadOutlined />}
+            icon={<FaCloudDownloadAlt />}
+            onClick={handleDownload}
+            style={{
+              marginRight: "1rem",
+              backgroundColor: "#7aad62",
+              width: "8rem",
+            }}
+          >
+            Download
+          </Button>
+          <Button
+            type="primary"
+            icon={<FaFileUpload />}
             onClick={() => {
               dispatch(resetBalanceValues());
               navigate("/");
             }}
-            style={{ marginRight: "1rem" }}
+            style={{ marginRight: "1rem", width: "8rem" }}
           >
-            Upload new file
+            New upload
           </Button>
         </div>
       </Header>

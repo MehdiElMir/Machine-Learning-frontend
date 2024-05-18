@@ -13,5 +13,4 @@ export const MessageInfo = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  height: 380px;
 `;

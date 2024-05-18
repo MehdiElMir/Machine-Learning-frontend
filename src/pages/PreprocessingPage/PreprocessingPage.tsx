@@ -95,6 +95,9 @@ export const PreprocessingPage: React.FC = () => {
               style={{
                 boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
                 height: "380px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <S.MessageInfo>
@@ -131,35 +134,33 @@ export const PreprocessingPage: React.FC = () => {
       <Row gutter={[16, 16]} style={{ width: "100%", marginTop: "1rem" }}>
         {/* Components group */}
         <Col sm={24} xs={24} md={12} span={12}>
-          <Card
-            bordered={false}
-            style={{
-              boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
-            }}
-          >
-            <Space
-              direction="vertical"
-              size="middle"
-              style={{ display: "flex" }}
+          {data.total_missing_percentage > 0 ? (
+            <Card
+              bordered={false}
+              style={{
+                boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
+                height: "100%",
+              }}
             >
-              {data.total_missing_percentage > 0 ? (
-                <ImputationForm />
-              ) : (
-                <Card
-                  bordered={false}
-                  style={{
-                    boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
-                  }}
-                >
-                  <S.MessageInfo style={{ height: "190px" }}>
-                    There is no missing values to imputate 👌
-                  </S.MessageInfo>
-                </Card>
-              )}
-
-              <ButtonModal />
-            </Space>
-          </Card>
+              <ImputationForm />
+            </Card>
+          ) : (
+            <Card
+              bordered={false}
+              style={{
+                boxShadow: "rgba(21, 27, 102, 0.2) 0px 2px 8px 0px",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <S.MessageInfo style={{ height: "190px", textAlign: "center" }}>
+                There is no missing values to imputate 👌
+              </S.MessageInfo>
+            </Card>
+          )}
         </Col>
         <Col sm={24} xs={24} md={12} span={12}>
           <Card

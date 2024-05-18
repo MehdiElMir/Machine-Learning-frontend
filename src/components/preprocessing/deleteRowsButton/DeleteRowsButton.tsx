@@ -28,7 +28,7 @@ export const DeleteRowsButton: React.FC = () => {
   return (
     <Popconfirm
       title="Delete the rows"
-      description="It is not recommanded for model training when the number of rows with missing values is too big as it will impace the results! Do you want to proceed? "
+      description="It is not recommanded for model training when the number of rows with missing values is too big as it will impact the results! Do you want to proceed? "
       onConfirm={confirm}
       onCancel={cancel}
       okText="Yes"

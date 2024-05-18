@@ -191,10 +191,13 @@ const dataInfoSlice = createSlice({
         state.loading = "pending";
       })
       .addCase(underSampling.fulfilled, (state, action) => {
-        const { data, num_rows } = action.payload;
+        const { data, num_rows, missing_percentage, total_missing_percentage } =
+          action.payload;
         state.loading = "succeeded";
         state.data.dataset = data;
         state.data.num_rows = num_rows;
+        state.data.total_missing_percentage = total_missing_percentage;
+        state.data.missing_percentage = missing_percentage;
       })
       .addCase(underSampling.rejected, (state) => {
         state.loading = "failed";
@@ -203,10 +206,13 @@ const dataInfoSlice = createSlice({
         state.loading = "pending";
       })
       .addCase(overSampling.fulfilled, (state, action) => {
-        const { data, num_rows } = action.payload;
+        const { data, num_rows, missing_percentage, total_missing_percentage } =
+          action.payload;
         state.loading = "succeeded";
         state.data.dataset = data;
         state.data.num_rows = num_rows;
+        state.data.total_missing_percentage = total_missing_percentage;
+        state.data.missing_percentage = missing_percentage;
       })
       .addCase(overSampling.rejected, (state) => {
         state.loading = "failed";
