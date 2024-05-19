@@ -10,6 +10,7 @@ import {
   Radio,
   Row,
   Select,
+  Tooltip,
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +19,11 @@ import {
   deletingSelectedColumns,
   imputateSelectedColumns,
 } from "../../store/slices/dataInfoSlice";
-import { DeleteFilled, PlusCircleFilled } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  PlusCircleFilled,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import {
   crossValidation,
   linearRegression2D,
@@ -84,7 +89,14 @@ const CrossValidationForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Cross Validation
+        Cross Validation{" "}
+        <Tooltip
+          color="#6047ed"
+          overlayInnerStyle={{ width: "400px" }}
+          title="This plot will show the results of using cross-validation to train a Lasso regression model. Each dashed line represents the Mean Square Error (MSE) for different folds of the data as we vary the regularization parameter, alpha. The solid black line shows the average MSE across all folds. The vertical dashed line indicates the best alpha value that minimizes the MSE. Cross-validation helps ensure our model generalizes well to new, unseen data."
+        >
+          <QuestionCircleOutlined />
+        </Tooltip>
       </p>
       <Row gutter={16} justify={"space-between"}>
         <Col span={8}>

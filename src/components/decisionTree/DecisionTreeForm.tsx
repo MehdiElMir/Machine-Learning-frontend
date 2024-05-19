@@ -8,6 +8,7 @@ import {
   Radio,
   Row,
   Select,
+  Tooltip,
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,11 @@ import {
   deletingSelectedColumns,
   imputateSelectedColumns,
 } from "../../store/slices/dataInfoSlice";
-import { DeleteFilled, PlusCircleFilled } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  PlusCircleFilled,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import {
   crossValidation,
   decisionTree,
@@ -81,7 +86,14 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Decision Tree
+        Decision Tree{" "}
+        <Tooltip
+          color="#6047ed"
+          overlayInnerStyle={{ width: "400px" }}
+          title="The result will show the predictions made by a Decision Tree Regressor. The scattered points represent the training and test data used to train and evaluate the model. The line represents the predictions made by the decision tree across the range of input values. Decision trees split the data into segments to make predictions, capturing non-linear relationships between the input feature and the target variable. This helps us understand the underlying patterns in the data."
+        >
+          <QuestionCircleOutlined />
+        </Tooltip>
       </p>
       <Row justify={"space-around"}>
         <Col span={6}>

@@ -8,6 +8,7 @@ import {
   Radio,
   Row,
   Select,
+  Tooltip,
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,11 @@ import {
   deletingSelectedColumns,
   imputateSelectedColumns,
 } from "../../../store/slices/dataInfoSlice";
-import { DeleteFilled, PlusCircleFilled } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  PlusCircleFilled,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import { linearRegression2D } from "../../../store/slices/linearRegressionSlice";
 import { AiFillPlayCircle } from "react-icons/ai";
 
@@ -59,6 +64,9 @@ const LinearRegressionForm: React.FC<Props> = ({ setPlotData }) => {
     console.log("Failed:", errorInfo);
   };
 
+  const tooltipMessage =
+    "This plot shows the relationship between the selected feature (X) and the target variable (Y) using linear regression. The scattered points represent the actual data, while the line represents the best fit linear model. This line helps us understand the trend and make predictions based on the input feature. Linear regression is a basic yet powerful tool for identifying relationships and trends in data.";
+
   return (
     <Form
       layout="horizontal"
@@ -76,7 +84,14 @@ const LinearRegressionForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Linear Regression 2D
+        Linear Regression 2D{" "}
+        <Tooltip
+          color="#6047ed"
+          overlayInnerStyle={{ width: "400px" }}
+          title={tooltipMessage}
+        >
+          <QuestionCircleOutlined />
+        </Tooltip>
       </p>
       <Row justify={"space-around"}>
         <Col span={6}>

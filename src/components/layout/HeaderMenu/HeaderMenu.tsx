@@ -44,6 +44,10 @@ const items: MenuProps["items"] = [
         label: <Link to={"KnnClassification"}>Knn Classification</Link>,
         key: "KnnClassification",
       },
+      {
+        label: <Link to={"testing"}>Test</Link>,
+        key: "testing",
+      },
     ],
   },
 ];

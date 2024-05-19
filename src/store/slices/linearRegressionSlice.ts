@@ -3,6 +3,7 @@ import {
   crossValidationApi,
   decisionTreeApi,
   knnClassificationApi,
+  knnRegressionApi,
   linearRegression2DApi,
 } from "../../api/regression.api";
 import { notificationController } from "../../controllers/notificationController";
@@ -74,6 +75,21 @@ export const knnClassification: any = createAsyncThunk(
         requestData,
         "/knn_classification/"
       );
+      return response;
+    } catch (e) {
+      notificationController.error({
+        message: `${e}`,
+      });
+      throw e;
+    }
+  }
+);
+
+export const knnRegression: any = createAsyncThunk(
+  "regression/fetchKnnRegression",
+  async (requestData: any) => {
+    try {
+      const response = await knnRegressionApi(requestData, "/knn_regression/");
       return response;
     } catch (e) {
       notificationController.error({

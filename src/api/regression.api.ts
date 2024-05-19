@@ -101,3 +101,19 @@ export const knnClassificationApi = async (
     throw error.response?.data || "generating knn Classification failed";
   }
 };
+
+export const knnRegressionApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating knn Regression failed", error);
+    throw error.response?.data || "generating knn Regression failed";
+  }
+};

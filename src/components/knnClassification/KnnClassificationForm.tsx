@@ -9,6 +9,7 @@ import {
   Radio,
   Row,
   Select,
+  Tooltip,
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,11 @@ import {
   deletingSelectedColumns,
   imputateSelectedColumns,
 } from "../../store/slices/dataInfoSlice";
-import { DeleteFilled, PlusCircleFilled } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  PlusCircleFilled,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import {
   crossValidation,
   decisionTree,
@@ -83,7 +88,14 @@ const KnnClassificationForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Knn Classification
+        Knn Classification{" "}
+        <Tooltip
+          color="#6047ed"
+          overlayInnerStyle={{ width: "400px" }}
+          title="The result is about classifying data points using the K-Nearest Neighbors (KNN) algorithm. Each point represents a test sample, colored by the probability score of belonging to the first class. The symbols indicate the true labels of the test samples. KNN is a simple, intuitive algorithm that classifies a sample based on the majority class of its nearest neighbors. The color gradient helps visualize how confident the classifier is in its predictions."
+        >
+          <QuestionCircleOutlined />
+        </Tooltip>
       </p>
       <Row justify={"space-around"}>
         <Col span={6}>
