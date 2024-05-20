@@ -14,6 +14,11 @@ import { TestingPage } from "./pages/TestingPage/TestingPage";
 import { CrossValidationPage } from "./pages/CrossValidationPage/CrossValdationPage";
 import { DecisionTreePage } from "./pages/DecisionTreePage/DecisionTreePage";
 import { KnnClassificationPage } from "./pages/KnnClassificationPage/KnnClassificationPage";
+import { DecisionTreeVisualisationPage } from "./pages/DecisionTreeVisualisationPage/DecisionTreeVisualisationPage";
+import { KnnMixPage } from "./pages/KnnMixPage/KnnMixPage";
+import { MultipleLinearRegressionPage } from "./pages/MultipleLinearRegressionPage/MultipleLinearRegressionPage";
+import { KnnRegressionPage } from "./pages/KnnRegressionPage/KnnClassificationPage";
+import { LinearRegression3DPage } from "./pages/LinearRegression/LinearRegression3D";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +38,14 @@ const router = createBrowserRouter([
         element: <LinearRegressionPage />,
       },
       {
+        path: "3d-linear-regression",
+        element: <LinearRegression3DPage />,
+      },
+      {
+        path: "multiple_linear_regression",
+        element: <MultipleLinearRegressionPage />,
+      },
+      {
         path: "crossValidation",
         element: <CrossValidationPage />,
       },
@@ -41,8 +54,20 @@ const router = createBrowserRouter([
         element: <DecisionTreePage />,
       },
       {
+        path: "DecisionTreeVizualisation",
+        element: <DecisionTreeVisualisationPage />,
+      },
+      {
+        path: "KnnRegression",
+        element: <KnnRegressionPage />,
+      },
+      {
         path: "KnnClassification",
         element: <KnnClassificationPage />,
+      },
+      {
+        path: "KnnMix",
+        element: <KnnMixPage />,
       },
       {
         path: "testing",

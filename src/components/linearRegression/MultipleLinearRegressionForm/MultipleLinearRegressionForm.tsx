@@ -12,25 +12,24 @@ import {
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 import {
   deletingSelectedColumns,
   imputateSelectedColumns,
-} from "../../store/slices/dataInfoSlice";
+} from "../../../store/slices/dataInfoSlice";
 import {
   DeleteFilled,
   PlusCircleFilled,
   QuestionCircleOutlined,
 } from "@ant-design/icons";
 import {
-  crossValidation,
-  decisionTree,
   linearRegression2D,
-} from "../../store/slices/linearRegressionSlice";
+  multipleLinearRegression,
+} from "../../../store/slices/linearRegressionSlice";
 import { AiFillPlayCircle } from "react-icons/ai";
 
 type FieldType = {
-  column?: string;
+  features?: string;
   target?: string;
 };
 
@@ -38,16 +37,16 @@ interface Props {
   setPlotData: React.Dispatch<any>;
 }
 
-const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
+const MultipleLinearRegressionForm: React.FC<Props> = ({ setPlotData }) => {
   const {
-    data: { numeric_columns_names, dataset },
+    data: { missing_percentage, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const dynamiqueOptions: any = [];
 
-  numeric_columns_names.forEach((o) => {
+  Object.keys(missing_percentage).forEach((o) => {
     dynamiqueOptions.push({ label: o, value: o });
   });
 
@@ -55,11 +54,10 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log(values);
     const requestBody = {
       dataset: dataset,
-      column: values.column,
+      features: values.features,
       target: values.target,
     };
-    console.log(requestBody);
-    const response = await dispatch(decisionTree(requestBody));
+    const response = await dispatch(multipleLinearRegression(requestBody));
     setPlotData(response.payload.plot_data);
     form.resetFields();
   };
@@ -69,10 +67,12 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log("Failed:", errorInfo);
   };
 
+  const tooltipMessage = "";
+
   return (
     <Form
       layout="horizontal"
-      name="DecisionTreeForm"
+      name="MultiplelinearRegressionForm"
       style={{
         width: "100%",
         padding: "10px",
@@ -86,11 +86,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Decision Tree Result{" "}
+        Multiple Linear Regression{" "}
         <Tooltip
           color="#6047ed"
           overlayInnerStyle={{ width: "400px" }}
-          title="The result will show the predictions made by a Decision Tree Regressor. The scattered points represent the training and test data used to train and evaluate the model. The line represents the predictions made by the decision tree across the range of input values. Decision trees split the data into segments to make predictions, capturing non-linear relationships between the input feature and the target variable. This helps us understand the underlying patterns in the data."
+          title={tooltipMessage}
         >
           <QuestionCircleOutlined />
         </Tooltip>
@@ -98,11 +98,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       <Row justify={"space-around"}>
         <Col span={6}>
           <Form.Item<FieldType>
-            label="Feature"
-            name="column"
+            label="Features"
+            name="features"
             rules={[{ required: true, message: "Please select a feature" }]}
           >
-            <Select options={dynamiqueOptions} />
+            <Select mode="multiple" options={dynamiqueOptions} />
           </Form.Item>
         </Col>
         <Col span={6}>
@@ -126,4 +126,4 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   );
 };
 
-export default DecisionTreeForm;
+export default MultipleLinearRegressionForm;

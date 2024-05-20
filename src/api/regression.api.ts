@@ -54,6 +54,22 @@ export const linearRegression2DApi = async (
   }
 };
 
+export const linearRegression3DApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating linear regression 3D failed", error);
+    throw error.response?.data || "generating linear regression 3D failed";
+  }
+};
+
 export const crossValidationApi = async (
   data: any,
   apiUrl: string
@@ -86,6 +102,24 @@ export const decisionTreeApi = async (
   }
 };
 
+export const decisionTreeVisualisationApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating decision tree visualisation failed", error);
+    throw (
+      error.response?.data || "generating decision tree visualisation failed"
+    );
+  }
+};
+
 export const knnClassificationApi = async (
   data: any,
   apiUrl: string
@@ -115,5 +149,41 @@ export const knnRegressionApi = async (
   } catch (error: any) {
     console.error("generating knn Regression failed", error);
     throw error.response?.data || "generating knn Regression failed";
+  }
+};
+
+export const knnRegressionMixApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating knn Regression comparaison failed", error);
+    throw (
+      error.response?.data || "generating knn Regression comparaison failed"
+    );
+  }
+};
+
+export const multipleLinearRegressionApi = async (
+  data: any,
+  apiUrl: string
+): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axiosInstance.post<any>(
+      apiUrl,
+      data
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("generating multiple linear Regression failed", error);
+    throw (
+      error.response?.data || "generating multiple linear Regression failed"
+    );
   }
 };

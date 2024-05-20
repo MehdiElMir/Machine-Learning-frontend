@@ -27,23 +27,68 @@ const items: MenuProps["items"] = [
         key: "linear-regression",
         children: [
           {
-            label: <Link to={"2d-linear-regression"}>2D</Link>,
+            label: (
+              <Link to={"2d-linear-regression"}>Simple linear regression</Link>
+            ),
             key: "2D",
+          },
+          {
+            label: (
+              <Link to={"3d-linear-regression"}>3D linear regression</Link>
+            ),
+            key: "3D",
+          },
+          {
+            label: (
+              <Link to={"multiple_linear_regression"}>
+                Multiple linear regression
+              </Link>
+            ),
+            key: "multiple_linear_regression",
           },
         ],
       },
       {
-        label: <Link to={"CrossValidation"}>Cross Validation</Link>,
+        label: "Knn",
+        key: "Knn",
+        children: [
+          {
+            label: <Link to={"KnnClassification"}>Knn classification</Link>,
+            key: "Knn Classification",
+          },
+          {
+            label: <Link to={"KnnRegression"}>Knn Regression</Link>,
+            key: "KnnRegression",
+          },
+          {
+            label: <Link to={"KnnMix"}>Knn regression comparaison</Link>,
+            key: "KnnMix",
+          },
+        ],
+      },
+      {
+        label: "DecisionTree",
+        key: "DecisionTree",
+        children: [
+          {
+            label: (
+              <Link to={"DecisionTreeVizualisation"}>
+                Decision tree vizualisation
+              </Link>
+            ),
+            key: "DecisionTreeVizualisation",
+          },
+          {
+            label: <Link to={"DecisionTree"}>Decision tree result</Link>,
+            key: "DecisionTreeResult",
+          },
+        ],
+      },
+      {
+        label: <Link to={"CrossValidation"}>Cross validation</Link>,
         key: "CrossValidation",
       },
-      {
-        label: <Link to={"DecisionTree"}>Decision Tree</Link>,
-        key: "DecisionTree",
-      },
-      {
-        label: <Link to={"KnnClassification"}>Knn Classification</Link>,
-        key: "KnnClassification",
-      },
+
       {
         label: <Link to={"testing"}>Test</Link>,
         key: "testing",

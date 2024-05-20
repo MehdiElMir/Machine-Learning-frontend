@@ -5,6 +5,7 @@ import {
   Checkbox,
   Col,
   Form,
+  InputNumber,
   Radio,
   Row,
   Select,
@@ -25,20 +26,22 @@ import {
 import {
   crossValidation,
   decisionTree,
+  knnClassification,
+  knnRegression,
   linearRegression2D,
 } from "../../store/slices/linearRegressionSlice";
 import { AiFillPlayCircle } from "react-icons/ai";
 
 type FieldType = {
-  column?: string;
   target?: string;
+  n_neighbors?: string;
 };
 
 interface Props {
   setPlotData: React.Dispatch<any>;
 }
 
-const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
+const KnnRegressionForm: React.FC<Props> = ({ setPlotData }) => {
   const {
     data: { numeric_columns_names, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
@@ -55,11 +58,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log(values);
     const requestBody = {
       dataset: dataset,
-      column: values.column,
       target: values.target,
+      n_neighbors: values.n_neighbors,
     };
     console.log(requestBody);
-    const response = await dispatch(decisionTree(requestBody));
+    const response = await dispatch(knnRegression(requestBody));
     setPlotData(response.payload.plot_data);
     form.resetFields();
   };
@@ -72,7 +75,7 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   return (
     <Form
       layout="horizontal"
-      name="DecisionTreeForm"
+      name="KnnRegressionForm"
       style={{
         width: "100%",
         padding: "10px",
@@ -86,11 +89,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Decision Tree Result{" "}
+        Knn Regression{" "}
         <Tooltip
           color="#6047ed"
           overlayInnerStyle={{ width: "400px" }}
-          title="The result will show the predictions made by a Decision Tree Regressor. The scattered points represent the training and test data used to train and evaluate the model. The line represents the predictions made by the decision tree across the range of input values. Decision trees split the data into segments to make predictions, capturing non-linear relationships between the input feature and the target variable. This helps us understand the underlying patterns in the data."
+          title=""
         >
           <QuestionCircleOutlined />
         </Tooltip>
@@ -98,8 +101,8 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       <Row justify={"space-around"}>
         <Col span={6}>
           <Form.Item<FieldType>
-            label="Feature"
-            name="column"
+            label="Target"
+            name="target"
             rules={[{ required: true, message: "Please select a feature" }]}
           >
             <Select options={dynamiqueOptions} />
@@ -107,11 +110,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
         </Col>
         <Col span={6}>
           <Form.Item<FieldType>
-            label="Target"
-            name="target"
-            rules={[{ required: true, message: "Please select a target" }]}
+            label="N-Neighbors"
+            name="n_neighbors"
+            rules={[{ required: true, message: "Please enter a number" }]}
           >
-            <Select style={{ width: "100%" }} options={dynamiqueOptions} />
+            <InputNumber />
           </Form.Item>
         </Col>
       </Row>
@@ -126,4 +129,4 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   );
 };
 
-export default DecisionTreeForm;
+export default KnnRegressionForm;

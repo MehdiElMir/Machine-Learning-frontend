@@ -12,25 +12,25 @@ import {
   type FormProps,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 import {
   deletingSelectedColumns,
   imputateSelectedColumns,
-} from "../../store/slices/dataInfoSlice";
+} from "../../../store/slices/dataInfoSlice";
 import {
   DeleteFilled,
   PlusCircleFilled,
   QuestionCircleOutlined,
 } from "@ant-design/icons";
 import {
-  crossValidation,
-  decisionTree,
   linearRegression2D,
-} from "../../store/slices/linearRegressionSlice";
+  linearRegression3D,
+} from "../../../store/slices/linearRegressionSlice";
 import { AiFillPlayCircle } from "react-icons/ai";
 
 type FieldType = {
-  column?: string;
+  feature1?: string;
+  feature2?: string;
   target?: string;
 };
 
@@ -38,7 +38,7 @@ interface Props {
   setPlotData: React.Dispatch<any>;
 }
 
-const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
+const LinearRegression3DForm: React.FC<Props> = ({ setPlotData }) => {
   const {
     data: { numeric_columns_names, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
@@ -47,7 +47,7 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
 
   const dynamiqueOptions: any = [];
 
-  numeric_columns_names.forEach((o) => {
+  Object.values(numeric_columns_names).forEach((o) => {
     dynamiqueOptions.push({ label: o, value: o });
   });
 
@@ -55,11 +55,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log(values);
     const requestBody = {
       dataset: dataset,
-      column: values.column,
-      target: values.target,
+      selected_x1: values.feature1,
+      selected_x2: values.feature2,
+      selected_y: values.target,
     };
-    console.log(requestBody);
-    const response = await dispatch(decisionTree(requestBody));
+    const response = await dispatch(linearRegression3D(requestBody));
     setPlotData(response.payload.plot_data);
     form.resetFields();
   };
@@ -69,10 +69,12 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log("Failed:", errorInfo);
   };
 
+  const tooltipMessage = "";
+
   return (
     <Form
       layout="horizontal"
-      name="DecisionTreeForm"
+      name="linearRegression3DForm"
       style={{
         width: "100%",
         padding: "10px",
@@ -86,26 +88,35 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Decision Tree Result{" "}
+        Linear Regression 3D{" "}
         <Tooltip
           color="#6047ed"
           overlayInnerStyle={{ width: "400px" }}
-          title="The result will show the predictions made by a Decision Tree Regressor. The scattered points represent the training and test data used to train and evaluate the model. The line represents the predictions made by the decision tree across the range of input values. Decision trees split the data into segments to make predictions, capturing non-linear relationships between the input feature and the target variable. This helps us understand the underlying patterns in the data."
+          title={tooltipMessage}
         >
           <QuestionCircleOutlined />
         </Tooltip>
       </p>
       <Row justify={"space-around"}>
-        <Col span={6}>
+        <Col span={8}>
           <Form.Item<FieldType>
-            label="Feature"
-            name="column"
+            label="Feature 1"
+            name="feature1"
             rules={[{ required: true, message: "Please select a feature" }]}
           >
             <Select options={dynamiqueOptions} />
           </Form.Item>
         </Col>
-        <Col span={6}>
+        <Col span={8}>
+          <Form.Item<FieldType>
+            label="Feature 2"
+            name="feature2"
+            rules={[{ required: true, message: "Please select a feature" }]}
+          >
+            <Select options={dynamiqueOptions} />
+          </Form.Item>
+        </Col>
+        <Col span={8}>
           <Form.Item<FieldType>
             label="Target"
             name="target"
@@ -126,4 +137,4 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   );
 };
 
-export default DecisionTreeForm;
+export default LinearRegression3DForm;

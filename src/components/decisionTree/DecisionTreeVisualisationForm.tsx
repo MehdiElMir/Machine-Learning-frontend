@@ -5,6 +5,7 @@ import {
   Checkbox,
   Col,
   Form,
+  InputNumber,
   Radio,
   Row,
   Select,
@@ -25,29 +26,36 @@ import {
 import {
   crossValidation,
   decisionTree,
+  decisionTreeVisualisation,
   linearRegression2D,
 } from "../../store/slices/linearRegressionSlice";
 import { AiFillPlayCircle } from "react-icons/ai";
 
 type FieldType = {
-  column?: string;
   target?: string;
+  criterion?: string;
+  max_depth?: string;
 };
 
 interface Props {
-  setPlotData: React.Dispatch<any>;
+  setImage: React.Dispatch<any>;
 }
 
-const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
+const DecisionTreeVisualisationForm: React.FC<Props> = ({ setImage }) => {
   const {
-    data: { numeric_columns_names, dataset },
+    data: { missing_percentage, dataset },
   } = useSelector((state: RootState) => state.dataInfo);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
+  const criterionOptions: any = [
+    { label: "gini", value: "gini" },
+    { label: "entropy", value: "entropy" },
+  ];
+
   const dynamiqueOptions: any = [];
 
-  numeric_columns_names.forEach((o) => {
+  Object.keys(missing_percentage).forEach((o) => {
     dynamiqueOptions.push({ label: o, value: o });
   });
 
@@ -55,12 +63,14 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
     console.log(values);
     const requestBody = {
       dataset: dataset,
-      column: values.column,
       target: values.target,
+      max_depth: values.max_depth,
+      criterion: values.criterion,
     };
     console.log(requestBody);
-    const response = await dispatch(decisionTree(requestBody));
-    setPlotData(response.payload.plot_data);
+    const response = await dispatch(decisionTreeVisualisation(requestBody));
+    console.log(response);
+    setImage(`data:image/png;base64,${response.payload.image}`);
     form.resetFields();
   };
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
@@ -72,7 +82,7 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   return (
     <Form
       layout="horizontal"
-      name="DecisionTreeForm"
+      name="DecisionTreeVisualisationForm"
       style={{
         width: "100%",
         padding: "10px",
@@ -86,11 +96,11 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       autoComplete="off"
     >
       <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#6047ed" }}>
-        Decision Tree Result{" "}
+        Decision Tree Visualisation{" "}
         <Tooltip
           color="#6047ed"
           overlayInnerStyle={{ width: "400px" }}
-          title="The result will show the predictions made by a Decision Tree Regressor. The scattered points represent the training and test data used to train and evaluate the model. The line represents the predictions made by the decision tree across the range of input values. Decision trees split the data into segments to make predictions, capturing non-linear relationships between the input feature and the target variable. This helps us understand the underlying patterns in the data."
+          title="This visualization shows the structure of a Decision Tree Classifier. Each node represents a decision based on a feature, splitting the data into subsets to predict the target variable. The leaves at the bottom of the tree indicate the final prediction classes. The color and labels in each node provide information about the majority class and the proportion of samples. Decision trees help us understand the decision-making process of the model, making it easier to interpret and explain the predictions."
         >
           <QuestionCircleOutlined />
         </Tooltip>
@@ -98,20 +108,29 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
       <Row justify={"space-around"}>
         <Col span={6}>
           <Form.Item<FieldType>
-            label="Feature"
-            name="column"
-            rules={[{ required: true, message: "Please select a feature" }]}
-          >
-            <Select options={dynamiqueOptions} />
-          </Form.Item>
-        </Col>
-        <Col span={6}>
-          <Form.Item<FieldType>
             label="Target"
             name="target"
             rules={[{ required: true, message: "Please select a target" }]}
           >
             <Select style={{ width: "100%" }} options={dynamiqueOptions} />
+          </Form.Item>
+        </Col>
+        <Col span={6}>
+          <Form.Item<FieldType>
+            label="Criterion"
+            name="criterion"
+            rules={[{ required: true, message: "Please select a criterion" }]}
+          >
+            <Select style={{ width: "100%" }} options={criterionOptions} />
+          </Form.Item>
+        </Col>
+        <Col span={6}>
+          <Form.Item<FieldType>
+            label="Max Depth"
+            name="max_depth"
+            rules={[{ required: true, message: "Please select a max depth" }]}
+          >
+            <InputNumber />
           </Form.Item>
         </Col>
       </Row>
@@ -126,4 +145,4 @@ const DecisionTreeForm: React.FC<Props> = ({ setPlotData }) => {
   );
 };
 
-export default DecisionTreeForm;
+export default DecisionTreeVisualisationForm;
